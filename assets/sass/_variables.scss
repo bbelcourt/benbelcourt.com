@@ -1,0 +1,28 @@
+
+/** Fonts **/
+$default_font: Arial, sans-serif;
+$default_font_size: 19px;
+$default_line_height: 1.5;
+
+
+/** Colors **/
+$darkest: #11455e;
+$darker: #1e78a4;
+$lighter: #f8f5f1;
+$lightest: #fff;
+
+$highlight: #d7ddd7;
+
+$font_color: #434343;
+
+$link_color: $darker;
+$link_hover_color: $lighter;
+
+//** Layout **/
+$min_body_width: 320px;
+$max_body_width: 1024px;
+$main_side_padding: 2.1%;
+
+/** Mixin variables **/
+// Border Radius
+$default_radius: 10px;

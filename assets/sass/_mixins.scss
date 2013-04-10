@@ -1,0 +1,146 @@
+// clear fix
+@mixin clearfix {
+  zoom: 1;
+
+  &:before,
+  &:after {
+    content: "";
+    display: table;
+  }
+
+  &:after {
+    clear: both;
+  }
+}
+
+// turn off the bullet for an element of a list
+@mixin no-bullet {
+  list-style-image : none;
+  list-style-type : none;
+  margin-left : 0;
+}
+
+// turns off the bullets for an entire list
+@mixin no-bullets {
+  list-style: none;
+  li { @include no-bullet; }
+}
+
+// Horizontal list mixin
+@mixin horizontal-list-container {
+	overflow: hidden;
+}
+
+@mixin box-shadow($opacity) {
+  -webkit-box-shadow: 0px 0px 50px 0px rgba(0, 0, 0, $opacity); /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+          box-shadow: 0px 0px 50px 0px rgba(0, 0, 0, $opacity); /* Opera 10.5, IE9, Firefox 4+, Chrome 6+, iOS 5 */
+}
+
+
+@mixin horizontal-list-item($padding: 8px, $direction: left) {
+  @include no-bullet;
+  white-space: nowrap;
+  float: $direction;
+  @if $padding {
+    padding: {
+      left: $padding;
+      right: $padding;
+    }
+    &:first-child, &.first { padding-#{$direction}: 0; }
+    &:last-child { padding-#{opposite-position($direction)}: 0; }
+    &.last { padding-#{opposite-position($direction)}: 0; }
+  }
+}
+
+@mixin opacity($default_opacity) {
+	opacity: $default_opacity;
+  	filter: alpha(opacity=$default_opacity);
+}
+
+
+// border radius mixin
+@mixin border_radius ($default_radius) {
+  -webkit-border-radius: $default_radius;
+     -moz-border-radius: $default_radius;
+          border-radius: $default_radius;
+}
+
+@mixin border_top_left_radius($default_radius) {
+  -webkit-border-top-left-radius: $default_radius;
+     -moz-border-top-left-radius: $default_radius;
+      -moz-border-radius-topleft: $default_radius;
+          border-top-left-radius: $default_radius;
+}
+
+@mixin border_top_right_radius($default_radius) {
+  -webkit-border-top-right-radius: $default_radius;
+     -moz-border-top-right-radius: $default_radius;
+      -moz-border-radius-topright: $default_radius;
+          border-top-right-radius: $default_radius;
+}
+
+@mixin border_bottom_left_radius($default_radius) {
+  -webkit-border-bottom-left-radius: $default_radius;
+     -moz-border-bottom-left-radius: $default_radius;
+      -moz-border-radius-bottomleft: $default_radius;
+          border-bottom-left-radius: $default_radius;
+}
+
+@mixin border_bottom_right_radius($default_radius) {
+  -webkit-border-bottom-right-radius: $default_radius;
+     -moz-border-bottom-right-radius: $default_radius;
+      -moz-border-radius-bottomright: $default_radius;
+          border-bottom-right-radius: $default_radius;
+}
+
+@mixin border_top_radius($default_radius) {
+  @include border-top-left-radius($default_radius);
+  @include border-top-right-radius($default_radius);
+}
+
+@mixin border-right-radius($default_radius) {
+  @include border-top-right-radius($default_radius);
+  @include border-bottom-right-radius($default_radius);
+}
+
+@mixin border-bottom-radius($default_radius) {
+  @include border-bottom-left-radius($default_radius);
+  @include border-bottom-right-radius($default_radius);
+}
+
+@mixin border-left-radius($default_radius) {
+  @include border-top-left-radius($default_radius);
+  @include border-bottom-left-radius($default_radius);
+}
+
+
+// Linear gradient
+@mixin linear-gradient($G1, $G2: false,$fallback: false) {
+  $pos: top;
+  $full: $G1, $G2;
+
+  // Set $G1 as the default fallback color
+  $fallback-color: $G1;
+
+  // If $fallback is a color use that color as the fallback color
+  @if (type-of($fallback) == color) or ($fallback == "transparent") {
+    $fallback-color: $fallback;
+  }
+
+  background-color: $fallback-color;
+  background-image: deprecated-webkit-gradient(linear, $full); // Safari <= 5.0
+  background-image: -webkit-linear-gradient($pos, $full); // Safari 5.1+, Chrome
+  background-image: -moz-linear-gradient($pos, $full);
+  background-image: -ms-linear-gradient($pos, $full);
+  background-image: -o-linear-gradient($pos, $full);
+}
+
+// Default gradients
+// Default dark
+@mixin darkest_gradient($colorOne: #195572, $colorTwo: $darkest) {
+	@include linear-gradient($colorOne, $colorTwo);
+}
+// Default light
+@mixin lighter_gradient($colorOne: #f0f4f0, $colorTwo: $highlight) {
+	@include linear-gradient($colorOne, $colorTwo);
+}
