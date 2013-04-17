@@ -144,3 +144,69 @@
 @mixin lighter_gradient($colorOne: #f0f4f0, $colorTwo: $highlight) {
 	@include linear-gradient($colorOne, $colorTwo);
 }
+
+// 2D Transforms
+@mixin rotate_2D($degrees) {
+	-webkit-transform: rotate($degrees);  /* Chrome, Safari 3.1+ */
+	-moz-transform: rotate($degrees);  /* Firefox 3.5-15 */
+	-ms-transform: rotate($degrees);  /* IE 9 */
+	-o-transform: rotate($degrees);  /* Opera 10.50-12.00 */
+	transform: rotate($degrees);  /* Firefox 16+, IE 10+, Opera 12.10+ */
+}
+@mixin rotateY_2D($degrees) {
+	-webkit-transform: rotateY($degrees);  /* Chrome, Safari 3.1+ */
+	-moz-transform: rotateY($degrees);  /* Firefox 3.5-15 */
+	-ms-transform: rotateY($degrees);  /* IE 9 */
+	-o-transform: rotateY($degrees);  /* Opera 10.50-12.00 */
+	transform: rotateY($degrees);  /* Firefox 16+, IE 10+, Opera 12.10+ */
+}
+@mixin rotateX_2D($degrees) {
+	-webkit-transform: rotateX($degrees);  /* Chrome, Safari 3.1+ */
+	-moz-transform: rotateX($degrees);  /* Firefox 3.5-15 */
+	-ms-transform: rotateX($degrees);  /* IE 9 */
+	-o-transform: rotateX($degrees);  /* Opera 10.50-12.00 */
+	transform: rotateX($degrees);  /* Firefox 16+, IE 10+, Opera 12.10+ */
+}
+
+
+// 3D Transforms
+@mixin perspective($perspective) {
+	-webkit-perspective: $perspective;
+	-moz-perspective: $perspective;
+	-ms-perspective: $perspective;
+	perspective: $perspective;
+}
+
+@mixin preserve3D () {
+	-webkit-transform-style: preserve-3d;
+	-moz-transform-style: preserve-3d;
+	-ms-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+}
+
+@mixin rotateY_3D($degrees: 0deg, $perspective: "") {
+	-webkit-transform: rotateY($degrees);
+	-moz-transform: rotateY($degrees);
+	-ms-transform: rotateY($degrees);
+	transform: rotateY($degrees);
+
+	@if $perspective != "" {
+		@include perspective($perspective);
+	}
+}
+
+@mixin backface_hidden() {
+	backface-visibility: hidden;
+	-webkit-backface-visibility: hidden;
+	-moz-backface-visibility: hidden;
+	-ms-backface-visibility: hidden;
+}
+
+
+// Transitions
+@mixin transition ($duration, $transform: all, $easing: ease) {
+	-webkit-transition: $transform $duration $easing;
+	-moz-transition: $transform $duration $easing;
+	-o-transition: $transform $duration $easing;
+	transition: $transform $duration $easing;
+}

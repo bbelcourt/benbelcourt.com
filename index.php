@@ -1,6 +1,6 @@
 <?php
-
-	include("includes/header.php");
+	include("config.php");
+	include($PATH_ROOT . "includes/header.php");
 ?>
 				<div id="about" class="section">
 					<h1>About</h1>
@@ -21,9 +21,12 @@
 					<p>Acted as lead developer for a number of client web sites. Worked with companies such as Liberty Mutual, Senior Aerospace, Elavon, AcquireMedia, CyberArk, Protonex, and Burns &amp; Levinson</p>
 				</div>
 
-				<div id="javascript" class="section">
-					<h1>JavaScript</h1>
-					<p><a href="javascript/">view examples</a></p>
+				<div id="examples" class="section">
+					<h1>Examples</h1>
+					<ul>
+					<li><a href="examples/javascript/">javascript examples</a></li>
+					<li><a href="examples/css/">css examples</a></li>
+					</ul>
 				</div>
 				
 				<div id="projects" class="section">
@@ -42,5 +45,5 @@
 					</ul>
 				</div>
 <?php
-	include("includes/footer.php");
+	include($PATH_ROOT . "includes/footer.php");
 ?>

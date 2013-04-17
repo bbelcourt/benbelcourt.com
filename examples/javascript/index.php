@@ -1,6 +1,7 @@
 <?php
+	include("../../config.php");
 	$pageTitle = "JavaScript";
-	include("../includes/header.php");
+	include($PATH_ROOT . "includes/header.php");
 ?>
 		<div class="section">
 			<h1>JavaScript</h1>
@@ -14,7 +15,7 @@
 			<div class="results">
 
 			</div>
-			<p><a href="#" class="trigger">Send</a></p>
+			<p><a href="<?php echo $URL_ROOT; ?>examples/javascript/json.php" class="trigger">Send</a></p>
 		</div>
 
 		<div id="delegate" class="section">
@@ -26,5 +27,5 @@
 			<p><a href="#" class="trigger">Add Link</a></p>
 		</div>
 <?php
-	include("../includes/footer.php");
+	include($PATH_ROOT . "includes/footer.php");
 ?>

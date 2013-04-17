@@ -96,9 +96,9 @@ a:hover {
 		left: $main_side_padding;
 }
 
-#content .section h2,
-#content .section p,
-#content .section ul {
+#content .section > h2,
+#content .section > p,
+#content .section > ul {
 	@include clearfix;
 	padding-left: 5%;
 	position: relative;
@@ -122,6 +122,65 @@ a:hover {
 	color: $lighter;
 	padding: $main_side_padding;
 }
+
+/** CSS3 experimental code **/
+#transforms {
+	overflow: hidden;
+	position: relative;
+}
+#transforms .ribbon {
+	background: #FFC134;
+	border: 1px solid #323232;
+	font-size: 14px;
+	font-weight: bold;
+	padding: 5px 55px;
+	position: absolute;
+		top: 35px;
+		right: -62px;
+
+	@include rotate_2D(35deg);
+}
+	#transforms .ribbon p {
+		margin: 0;
+		padding: 0;
+	}
+
+#transforms .container {
+	@include perspective(800px);
+}
+#transforms .flip-widget {
+	height: 300px;
+	position: relative;
+	width: 250px;
+
+	@include preserve3D();
+	@include transition(1s);
+}
+#transforms .flipped {
+	@include rotateY_3D(180deg);
+}
+	#transforms .flip-widget .face {
+		background: #eaeaea;
+		border: 1px solid #323232;
+		height: 100%;
+		position: absolute;
+		width: 100%;
+
+		@include border_radius(10px);
+		@include backface_hidden();
+	}
+	#transforms .flip-widget .back {
+		background: #323232;
+		color: #fff;
+		@include rotateY_2D(180deg);
+	}
+	#transforms .flip-widget .face .content {
+		padding: 20px;
+	}
+	#transforms .flip-widget form .row {
+		margin-bottom: 20px;
+	}
+/** END CSS3 experimental code **/
 
 @media screen and (min-width: 960px) {
 	#wrapper {

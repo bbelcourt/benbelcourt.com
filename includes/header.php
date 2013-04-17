@@ -17,12 +17,12 @@
 	<body>
 		<div id="wrapper">
 			<div id="header">
-				<div id="logo"><a href="/">Ben Belcourt</a></div>
+				<div id="logo"><a href="<?php echo $URL_ROOT; ?>">Ben Belcourt</a></div>
 				<ul class="nav">
-					<li><a href="/javascript/">javascript</a></li>
+					<li><a href="<?php echo $URL_ROOT; ?>examples/">examples</a></li>
 					<li><a href="http://www.linkedin.com/in/benbelcourt">linkedin</a></li>
 					<li><a href="https://github.com/bbelcourt">github</a></li>
-					<li><a href="/#contact">contact</a></li>
+					<li><a href="<?php echo $URL_ROOT; ?>#contact">contact</a></li>
 				</ul>
 			</div>
 

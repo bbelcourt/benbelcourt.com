@@ -111,22 +111,22 @@ a:hover {
   top: .3em;
   left: 2.1%; }
 
-#content .section h2,
-#content .section p,
-#content .section ul {
+#content .section > h2,
+#content .section > p,
+#content .section > ul {
   zoom: 1;
   padding-left: 5%;
   position: relative; }
-  #content .section h2:before, #content .section h2:after,
-  #content .section p:before,
-  #content .section p:after,
-  #content .section ul:before,
-  #content .section ul:after {
+  #content .section > h2:before, #content .section > h2:after,
+  #content .section > p:before,
+  #content .section > p:after,
+  #content .section > ul:before,
+  #content .section > ul:after {
     content: "";
     display: table; }
-  #content .section h2:after,
-  #content .section p:after,
-  #content .section ul:after {
+  #content .section > h2:after,
+  #content .section > p:after,
+  #content .section > ul:after {
     clear: both; }
 
 #content .section h2 {
@@ -144,6 +144,95 @@ a:hover {
   color: #f8f5f1;
   padding: 2.1%; }
 
+/** CSS3 experimental code **/
+#transforms {
+  overflow: hidden;
+  position: relative; }
+
+#transforms .ribbon {
+  background: #FFC134;
+  border: 1px solid #323232;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 5px 55px;
+  position: absolute;
+  top: 35px;
+  right: -62px;
+  -webkit-transform: rotate(35deg);
+  /* Chrome, Safari 3.1+ */
+  -moz-transform: rotate(35deg);
+  /* Firefox 3.5-15 */
+  -ms-transform: rotate(35deg);
+  /* IE 9 */
+  -o-transform: rotate(35deg);
+  /* Opera 10.50-12.00 */
+  transform: rotate(35deg);
+  /* Firefox 16+, IE 10+, Opera 12.10+ */ }
+
+#transforms .ribbon p {
+  margin: 0;
+  padding: 0; }
+
+#transforms .container {
+  -webkit-perspective: 800px;
+  -moz-perspective: 800px;
+  -ms-perspective: 800px;
+  perspective: 800px; }
+
+#transforms .flip-widget {
+  height: 300px;
+  position: relative;
+  width: 250px;
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  transition: all 1s ease; }
+
+#transforms .flipped {
+  -webkit-transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg);
+  -ms-transform: rotateY(180deg);
+  transform: rotateY(180deg); }
+
+#transforms .flip-widget .face {
+  background: #eaeaea;
+  border: 1px solid #323232;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden; }
+
+#transforms .flip-widget .back {
+  background: #323232;
+  color: #fff;
+  -webkit-transform: rotateY(180deg);
+  /* Chrome, Safari 3.1+ */
+  -moz-transform: rotateY(180deg);
+  /* Firefox 3.5-15 */
+  -ms-transform: rotateY(180deg);
+  /* IE 9 */
+  -o-transform: rotateY(180deg);
+  /* Opera 10.50-12.00 */
+  transform: rotateY(180deg);
+  /* Firefox 16+, IE 10+, Opera 12.10+ */ }
+
+#transforms .flip-widget .face .content {
+  padding: 20px; }
+
+#transforms .flip-widget form .row {
+  margin-bottom: 20px; }
+
+/** END CSS3 experimental code **/
 @media screen and (min-width: 960px) {
   #wrapper {
     -webkit-box-shadow: 0px 0px 50px 0px rgba(0, 0, 0, 0.5);

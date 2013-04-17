@@ -4,6 +4,7 @@
 			</div>
 		</div>
 		
-		<script src="../assets/js/script.js"></script>
+		<script src="<?php echo $URL_ROOT; ?>assets/js/bblib.js"></script>
+		<script src="<?php echo $URL_ROOT; ?>assets/js/script.js"></script>
 	</body>
 </html>

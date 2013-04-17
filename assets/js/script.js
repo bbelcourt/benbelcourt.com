@@ -1,181 +1,128 @@
 /*******************************************
 *	Author: Ben Belcourt
-*	Last Modified: 4/8/2013
+*	Last Modified: 4/17/2013
 ********************************************/
 
 // Unique namespace to keep the global space clean
 var BB = BB || {};
 
-// Basic library functions to keep code DRY
-BB.lib = {
-	// Basic Ajax functionality
-	ajax: function (method, url, callback) {
-		var _xhr = new XMLHttpRequest();
-		
-		_xhr.open(method, url, true);
-		_xhr.send();
-		
-		_xhr.onreadystatechange = function () {
-			if (_xhr.readyState == 4 && _xhr.status == 200) {
-				if (typeof callback == 'function') {
-					callback(_xhr.responseText);
-				}
+// Check that the document is loaded
+B.on('readystatechange', document, function () {
+	if (document.readyState === 'complete') {
+		// Example of event delegation
+		B.on('click', document.getElementById('content'), function (e) {
+			if (B.hasClass('external', e.target)) {
+				e.preventDefault();
+				window.open(e.target.href);
 			};
+		});
+
+		BB.xhr();
+		BB.delegate();
+		BB.cardFlip();
+	}
+});
+
+// Example code for XMLHttpRequest
+BB.xhr = function () {
+	var
+	_container = document.getElementById('xhr'),
+	_xhrResponse
+	;
+
+	var _init = function () {
+		_initTriggers();	
+	};
+
+	var _initTriggers = function () {
+		var _triggers = B.getElementsByClass('trigger', _container);
+
+		for (var x = _triggers.length; x--;) {
+			B.on('click', _triggers[x], function (e) {
+				e.preventDefault();
+
+				_getJSON(this);
+			});
 		};
-	},
-	// Dom creation functionality
-	createNode: function (options) {
-		var _attr = options.attributes || [];
-		var _node = document.createElement(options.type);
-		if (options.text) {
-			_node.innerHTML = options.text;
-		}
+	};
 
-		for (var key in _attr) {
-			_node.setAttribute(key, _attr[key]);
-		}
+	var _displayResult = function (data) {
+		var _resultDiv = B.getElementsByClass('results', _container)[0];
+		var _result = JSON.parse(data);
 
-		return _node;
-	},
-	// Cross-browser function to retrieve elements by class name
-	getElementsByClass: function (selector, context) {
-		var _context = context || document;
-		
-		if (document.querySelectorAll) {
-			return _context.querySelectorAll('.' + selector);
-		} else {
-			var
-			_tags
-			,_elem
-			,_arr = []
-			;
+		_resultDiv.innerHTML = '<pre>' + data + '</pre>';
+	};
+	
+	var _getJSON = function (_url) {
+		B.ajax('GET', _url, _displayResult);
+	}
 
-			if (_context.all) {
-				_tags = _context.all;
-			} else {
-				_tags = _context.getElementsByTagName('*');
-			};
-
-			for (var x=_tags.length; x--;) {
-				_elem = _tags[x];
-				if (BB.lib.hasClass(_elem, selector)) {
-					_arr.push(_elem);
-				};
-			};
-
-			return _arr;
-		};
-	},
-	// Utility function to check a given element for a given class name
-	hasClass: function (el, _class) {
-		var classes = el.className.split(' ');
-		
-		for (var x=classes.length; x--;) {
-			if (classes[x] == _class) {
-				return true;
-			}
-		};
-
-		return false;
-	},
-	// Cross-browser event binding function
-	on: function (ev, el, func) {
-		if (el.addEventListener)  // W3C
-			el.addEventListener(ev,func,false);
-		else if (el.attachEvent) { // IE
-			el.attachEvent("on"+ev, func);
-		}
-		else {
-			el[ev] = func;
-		}
+	if (_container) {
+		_init();
 	}
 };
 
-(function () {
-	// Example of event delegation
-	BB.lib.on('click', document.getElementById('content'), function (e) {
-		if (BB.lib.hasClass(e.target, 'external')) {
-			e.preventDefault();
-			window.open(e.target.href);
-		};
-	});
+//Example of DOM manipulation and event binding/delegation
+BB.delegate = function () {
+	var _container = document.getElementById('delegate');
+	var _results = B.getElementsByClass('results', _container)[0];
 
-	// Example code for XMLHttpRequest
-	BB.xhr = function () {
-		var
-		_container = document.getElementById('xhr')
-		,_xhrResponse
-		;
+	var _init = function () {
+		_initLinks();
+	};
 
-		var _init = function () {
-			_initTriggers();	
-		};
-
-		var _initTriggers = function () {
-			var _triggers = BB.lib.getElementsByClass('trigger', _container);
-
-			for (var x = _triggers.length; x--;) {
-				BB.lib.on('click', _triggers[x], function (e) {
-					e.preventDefault();
-
-					_getJSON();
+	var _initLinks = function () {
+		B.on('click', _container, function(e) {
+			if(B.hasClass('trigger', e.target)) {
+				e.preventDefault();
+				var _linkNode = B.createNode({
+					'type': 'a',
+					'innerHTML': 'New Link',
+					'attributes': {
+						'href': '#',
+						'class': 'trigger'
+					}
 				});
-			};
-		};
+				var _listItem = B.createNode({
+					'type': 'li',
+				});
 
-		var _displayResult = function (data) {
-			var _resultDiv = BB.lib.getElementsByClass('results', _container)[0];
-			var _result = JSON.parse(data)
+				_listItem.appendChild(_linkNode);
+				_results.appendChild(_listItem);
+			}
+		});
+	};
 
-			_resultDiv.innerHTML = '<pre>' + data + '</pre>';
-		};
-		
-		var _getJSON = function () {
-			var _url = 'http://' + self.location.hostname + '/javascript/json.php'
+	if (_container) {
+		_init();
+	}
+};
 
-			BB.lib.ajax('GET', _url, _displayResult);
-		}
+BB.cardFlip = function () {
+	var _container = document.getElementById('transforms');
+	var _card, _triggers;
+	var _className = 'flipped';
 	
-		if (_container) {
-			_init();
-		}
+	var _init = function () {
+		_card = B.getElementsByClass('flip-widget', _container)[0];
+		_triggers = B.getElementsByClass('trigger', _container);
+		
+		_initTriggers();
 	};
-	BB.xhr();
 
-	//Example of DOM manipulation and event binding/delegation
-	BB.delegate = function () {
-		var _container = document.getElementById('delegate');
-		var _results = BB.lib.getElementsByClass('results', _container)[0];
+	_initTriggers = function () {
+		B.on('click', _triggers, function (e) {
+			e.preventDefault(); 
 
-		var _init = function () {
-			_initLinks();
-		};
-
-		var _initLinks = function () {
-			BB.lib.on('click', _container, function(e) {
-				if(BB.lib.hasClass(e.target, 'trigger')) {
-					e.preventDefault();
-					var _linkNode = BB.lib.createNode({
-						'type': 'a',
-						'text': 'Add Link',
-						'attributes': {
-							'href': '#',
-							'class': 'trigger'
-						}
-					});
-					var _listItem = BB.lib.createNode({
-						'type': 'li',
-					});
-					_listItem.appendChild(_linkNode);
-
-					_results.appendChild(_listItem);
-				}
-			});
-		};
-
-		if (_container) {
-			_init();
-		}
+			if (B.hasClass(_className, _card)) {
+				B.removeClass(_className, _card);
+			} else {
+				B.addClass(_className, _card);
+			}
+		});
 	};
-	BB.delegate();
-})();
+
+	if (_container) {
+		_init();
+	}
+};
