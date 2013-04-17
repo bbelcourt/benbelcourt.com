@@ -5,7 +5,7 @@
 ?>
 		<div class="section">
 			<h1>CSS</h1>
-			<p>CSS Examples...</p>
+			<p>This page contains various CSS examples and experiments.</p>
 		</div>
 
 		<div id="transforms" class="section">
@@ -43,7 +43,7 @@
 										<label for="input_02">Input 02</label>
 										<input type="text" name="input_02" value="" />
 									</div>
-									<div class="row buttons">
+									<div class="buttons">
 										<input type="submit" class="trigger" name="submit" value="Submit" />
 										<a href="#" class="cancel trigger">cancel</a>
 									</div>

@@ -5,7 +5,7 @@
 ?>
 		<div class="section">
 			<h1>JavaScript</h1>
-			<p>This page contains a number of examples of JavaScript functionality. This includes DOM creation and manipulation, Event binding and delegation, AJAX, and JSON. These examples use native code rather than libraries (jQuery, YUI, Dojo).</p>
+			<p>This page contains various JavaScript examples and experiments. This includes DOM creation and manipulation, Event binding and delegation, AJAX, and JSON. These examples use native code rather than libraries (jQuery, YUI, Dojo).</p>
 			<p><a class="external" href="/assets/js/script.js">View the JavaScript source</a></p>
 		</div>
 
