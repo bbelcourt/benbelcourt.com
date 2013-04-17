@@ -54,13 +54,6 @@
 				</div>
 			</div>
 		</div>
-
-		<div id="animation" class="section">
-			<h1>Animations</h1>
-			<div class="sandbox">
-
-			</div>
-		</div>
 <?php
 	include($PATH_ROOT . "includes/footer.php");
 ?>
